@@ -1,0 +1,45 @@
+version: '3.4'
+
+services:
+
+  python:
+    container_name: python
+    build: .
+    restart: ${RESTART}
+    volumes:
+      - /etc/localtime:/etc/localtime
+    environment:
+      - MYSQL_ROOT_PASSWORD
+    networks:
+      dpm:
+    depends_on:
+      - mysql
+
+  mysql:
+    container_name: mysql
+    image: mysql
+    restart: ${RESTART}
+    ports:
+      - ${MYSQL_ACCESS_PORT}:3306
+    volumes:
+      - ./mysql/mysql-init/setup.sql:/docker-entrypoint-initdb.d/setup.sql      # Creating database, tables and schema at the startup
+      - ./mysql/mysql-data:/var/lib/mysql                                       # Persisting the mysql data
+    environment:
+      - MYSQL_ROOT_PASSWORD
+      - TZ=Asia/Kolkata
+    networks:
+      dpm:
+
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: ${RESTART}
+    ports:
+      - ${ADMINER_PORT}:8080
+    networks:
+      dpm:
+    depends_on:
+      - mysql
+
+networks:
+  dpm:
