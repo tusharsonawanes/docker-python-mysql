@@ -1,5 +1,5 @@
-rm -rf mysql/mysql-data/*
+docker-compose down --remove-orphans
 
 rm -rf .env
 
-docker-compose down --remove-orphans
+rm -rf mysql/mysql-data/*
