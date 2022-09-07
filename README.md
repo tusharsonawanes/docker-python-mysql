@@ -1,4 +1,4 @@
-![dpm](https://github.com/tusharsonawanes/docker-python-mysql/tree/main/.pictures/dpm.png)
+![](https://github.com/tusharsonawanes/docker-python-mysql/tree/main/.pictures/dpm.png)
 
 ## Features
 
